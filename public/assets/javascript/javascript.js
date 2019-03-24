@@ -57844,20 +57844,22 @@ window.angular.module('org.nemanjan00.musictime.controllers', ['ui.bootstrap', '
 
 		$scope.total.mins = $scope.total.secs = $scope.current.mins = $scope.current.secs = "00";
 
-		var scope = angular.element(document.getElementsByClassName("window")[0]).scope();
+		//var scope = angular.element(document.getElementsByClassName("window")[0]).scope();
 
 		var files = engine.files;
 		//files = files.sort(function(a, b){return a.path.localeCompare(b.path);});
+
+    $scope.songs = [];
 
 		files.forEach(function(file, id) {	
 			file.active = "";
 			file.id = id;
 
-			scope.$apply(function(){
+			$scope.$apply(function(){
 				if(extensions.indexOf(path.extname(file.name.toLowerCase())) !== -1){
-					scope.songs.push(file);
+					$scope.songs.push(file);
 
-					scope.modal.close();
+					$scope.modal.close();
 				}
 			});
 		});
@@ -57997,11 +57999,10 @@ window.angular.module('org.nemanjan00.musictime.controllers', ['ui.bootstrap', '
 		if(!(phase == '$apply' || phase == '$digest')) {
 			this.$apply();
 		}
-	};
-
-	console.log("searching");
-
+  };
+  
 	tpb.topTorrents('101').then(function(results) {
+		console.log("lol");
 		console.log(results);
 		$scope.results = results;
 
